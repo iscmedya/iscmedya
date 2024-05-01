@@ -1,0 +1,50 @@
+div.usercp_nav_item {
+	background: transparent url(../../../images/mobile/cpanels/nav_item_bg.png) top left repeat;
+	color: #fff;
+	padding: 7px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+div.usercp_nav_item a {
+	width: 100%;
+	color: #fff;
+	height: 100%;
+	display: block;
+	text-decoration: none;
+}
+
+.usercp_notepad {
+	width: 95%;
+}
+
+.usercp_container {
+	margin: 5px;
+	padding: 8px;
+	border:1px solid #CCCCCC;
+}
+
+.usercp_navigation {
+	background: #23a0da url(../../../images/mobile/gradient.png) bottom left repeat-x;
+	width: 100%;
+	border: 1px solid #1379a8;
+	padding: 4px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+
+.usercp_navigation td {
+	padding: 3px;
+	text-align: left;
+}
+
+		
+		
+		
+		
+		
+		
+		
+		
