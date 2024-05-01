@@ -8,6 +8,7 @@
 $l['nav_search'] = "Search";
 $l['nav_results'] = "Results";
 
+$l['pages'] = "Pages:";
 $l['pages_last'] = "last";
 $l['search'] = "Search";
 $l['search_keyword'] = "Search by Keyword";
@@ -69,7 +70,7 @@ $l['unstick_threads'] = "Unstick Threads";
 $l['soft_delete_threads'] = "Soft Delete Threads";
 $l['restore_threads'] = "Restore Threads";
 $l['delete_threads'] = "Delete Threads Permanently";
-$l['move_threads'] = "Move Threads";
+$l['move_threads'] = "Move / Copy Threads";
 $l['approve_threads'] = "Approve Threads";
 $l['unapprove_threads'] = "Unapprove Threads";
 $l['inline_soft_delete_posts'] = "Soft Delete Posts";

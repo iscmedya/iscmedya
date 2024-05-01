@@ -1143,15 +1143,6 @@ function redirect($url, $message="", $title="", $force_redirect=false)
  */
 function multipage($count, $perpage, $page, $url, $breadcrumb=false)
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_multipage"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $newurl = google_seo_url_multipage($url);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($newurl)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         $url = $newurl;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	global $theme, $templates, $lang, $mybb, $plugins;
 
 	if($count <= $perpage)
@@ -1703,7 +1694,14 @@ function fetch_forum_permissions($fid, $gid, $groupperms)
 {
 	global $groupscache, $forum_cache, $fpermcache, $mybb, $fpermfields;
 
-	$groups = explode(",", $gid);
+    if(isset($gid))
+    {
+        $groups = explode(",", $gid);
+    }
+    else
+    {
+        $groups = array();
+    }
 
 	$current_permissions = array();
 	$only_view_own_threads = 1;
@@ -2736,6 +2734,12 @@ function get_server_load()
 		{
 			// sys_getloadavg() will return an array with [0] being load within the last minute.
 			$serverload = sys_getloadavg();
+
+			if(!is_array($serverload))
+			{
+				return $lang->unknown;
+			}
+
 			$serverload[0] = round($serverload[0], 4);
 		}
 		else if(@file_exists("/proc/loadavg") && $load = @file_get_contents("/proc/loadavg"))
@@ -5486,12 +5490,6 @@ function leave_usergroup($uid, $leavegroup)
  */
 function get_current_location($fields=false, $ignore=array(), $quick=false)
 {
-/* + PL:google_seo + */ global $mybb, $google_seo_location;
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */ if($google_seo_location && !$fields)
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     return $google_seo_location;
-/* + PL:google_seo + */ }
 	global $mybb;
 
 	if(defined("MYBB_LOCATION"))
@@ -5751,7 +5749,14 @@ function my_number_format($number)
 	}
 	else
 	{
-		$parts = explode('.', $number);
+        if(isset($number))
+        {
+            $parts = explode('.', $number);
+        }
+        else
+        {
+            $parts = array();
+        }
 
 		if(isset($parts[1]))
 		{
@@ -6138,7 +6143,7 @@ function my_strlen($string)
 
 	$string = preg_replace("#&\#([0-9]+);#", "-", $string);
 
-	if(strtolower($lang->settings['charset']) == "utf-8")
+	if(isset($lang->settings['charset']) && strtolower($lang->settings['charset']) == "utf-8")
 	{
 		// Get rid of any excess RTL and LTR override for they are the workings of the devil
 		$string = str_replace(dec_to_utf8(8238), "", $string);
@@ -6413,15 +6418,6 @@ function get_event_date($event)
  */
 function get_profile_link($uid=0)
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_profile"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $link = google_seo_url_profile($uid);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($link)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         return $link;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	$link = str_replace("{uid}", $uid, PROFILE_URL);
 	return htmlspecialchars_uni($link);
 }
@@ -6434,15 +6430,6 @@ function get_profile_link($uid=0)
  */
 function get_announcement_link($aid=0)
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_announcement"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $link = google_seo_url_announcement($aid);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($link)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         return $link;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	$link = str_replace("{aid}", $aid, ANNOUNCEMENT_URL);
 	return htmlspecialchars_uni($link);
 }
@@ -6496,15 +6483,6 @@ function build_profile_link($username="", $uid=0, $target="", $onclick="")
  */
 function get_forum_link($fid, $page=0)
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_forum"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $link = google_seo_url_forum($fid, $page);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($link)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         return $link;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	if($page > 0)
 	{
 		$link = str_replace("{fid}", $fid, FORUM_URL_PAGED);
@@ -6528,15 +6506,6 @@ function get_forum_link($fid, $page=0)
  */
 function get_thread_link($tid, $page=0, $action='')
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_thread"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $link = google_seo_url_thread($tid, $page, $action);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($link)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         return $link;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	if($page > 1)
 	{
 		if($action)
@@ -6577,15 +6546,6 @@ function get_thread_link($tid, $page=0, $action='')
  */
 function get_post_link($pid, $tid=0)
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_post"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $link = google_seo_url_post($pid, $tid);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($link)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         return $link;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	if($tid > 0)
 	{
 		$link = str_replace("{tid}", $tid, THREAD_URL_POST);
@@ -6607,15 +6567,6 @@ function get_post_link($pid, $tid=0)
  */
 function get_event_link($eid)
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_event"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $link = google_seo_url_event($eid);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($link)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         return $link;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	$link = str_replace("{eid}", $eid, EVENT_URL);
 	return htmlspecialchars_uni($link);
 }
@@ -6631,15 +6582,6 @@ function get_event_link($eid)
  */
 function get_calendar_link($calendar, $year=0, $month=0, $day=0)
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_calendar"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $link = google_seo_url_calendar($calendar, $year, $month, $day);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($link)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         return $link;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	if($day > 0)
 	{
 		$link = str_replace("{month}", $month, CALENDAR_URL_DAY);
@@ -6675,15 +6617,6 @@ function get_calendar_link($calendar, $year=0, $month=0, $day=0)
  */
 function get_calendar_week_link($calendar, $week)
 {
-/* + PL:google_seo + */ if(function_exists("google_seo_url_calendar_week"))
-/* + PL:google_seo + */ {
-/* + PL:google_seo + */     $link = google_seo_url_calendar_week($calendar, $week);
-/* + PL:google_seo + */ 
-/* + PL:google_seo + */     if($link)
-/* + PL:google_seo + */     {
-/* + PL:google_seo + */         return $link;
-/* + PL:google_seo + */     }
-/* + PL:google_seo + */ }
 	if($week < 0)
 	{
 		$week = str_replace('-', "n", $week);
@@ -7624,6 +7557,11 @@ function fetch_remote_file($url, $post_data=array(), $max_redirects=20)
 			$curlopt[10203] = array(
 				$url_components['host'].':'.$url_components['port'].':'.$destination_address
 			);
+		}
+
+		if(defined('CURLOPT_DISALLOW_USERNAME_IN_URL'))
+		{
+			$curlopt[CURLOPT_DISALLOW_USERNAME_IN_URL] = true;
 		}
 
 		if(!empty($post_body))
