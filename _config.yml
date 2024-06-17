@@ -1,2 +1,14 @@
-plugins:
-  - jekyll-admin
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
