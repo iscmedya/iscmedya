@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
               </span>
             </a>
             <p><p>
-              Özel Güvenlik Sitemiz ile ilgili <a href="https://ozelguvenlik.github.io/gizlilik-bilgirimi">Bilgilendirme</a> sayfamızı ziyaret edin.
+              Özel Güvenlik Sitemiz ile ilgili <a href="https://ozelguvenlik.github.io/gizlilik-bildirimi">Bilgilendirme</a> sayfamızı ziyaret edin.
             </p></p>
           </div>
         </div>
